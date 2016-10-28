@@ -22,7 +22,7 @@ export default class CreditCardScreen extends Component {
       taxCard : 0,
       maxMountCard : 0,
       openNew : false,
-      listCards : this.ds.cloneWithRows(db.objects('Card'))
+      listCards : this.cards.cloneWithRows(db.objects('Card'))
     };
   }
 
@@ -66,7 +66,7 @@ export default class CreditCardScreen extends Component {
   }
 
   render() {
-    return {this.state.openNew ? this.renderNewCard() : this.renderList() };  
+    return this.state.openNew ? this.renderNewCard() : this.renderList();
   }
 }
 

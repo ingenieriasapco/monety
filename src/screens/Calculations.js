@@ -51,10 +51,12 @@ export default class CalculationsScreen extends Component {
   }
 
   render(){
-    return
-    <CreditCard typeCard="visa" name="holi122">
-      <Text>Blas</Text>
-    </CreditCard>
+    return (
+      <CreditCard typeCard="visa" name="holi122">
+        <Text>Blas</Text>
+      </CreditCard>
+    );
+    
   }
 }
 
