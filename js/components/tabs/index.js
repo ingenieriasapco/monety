@@ -9,6 +9,7 @@ import myTheme from '../../themes/base-theme';
 
 import TabOne from './tabOne';
 import TabTwo from './tabTwo';
+import TabTww from './tabTwo';
 
 class NHTabs extends Component {
 
@@ -25,7 +26,7 @@ class NHTabs extends Component {
     return (
       <Container theme={myTheme}>
         <Header>
-          <Title>Tabs</Title>
+          <Title>monety</Title>
 
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="ios-menu" />
@@ -36,6 +37,7 @@ class NHTabs extends Component {
           <Tabs locked>
             <TabOne tabLabel="Features" />
             <TabTwo tabLabel="About" />
+            <TabTww tabLabel="About1" />
           </Tabs>
         </View>
       </Container>
