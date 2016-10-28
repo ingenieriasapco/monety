@@ -4,7 +4,8 @@ import {
   View,
   Text,
   TextInput,
-  Platform
+  Platform,
+  ListView
 } from 'react-native';
 
 import db from '../models';
@@ -14,10 +15,12 @@ import _ from 'lodash';
 export default class CalculationsScreen extends Component {
   constructor(props){
     super(props);
+    this.cards = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       precioStr : '',
       precioNum : 0,
       couta : 0,
+      cards : this.cards.cloneWithRows( db.list('Card') )
     };
   }
 
@@ -48,12 +51,14 @@ export default class CalculationsScreen extends Component {
 
 
   renderRow(data){
+    // Aqui hacer los calculos
     return (
-      <CreditCard typeCard="visa" name="holi122">
+      <CreditCard typeCard={data.type} name={data.name}>
         <Text>Blas</Text>
-      </CreditCard> );
-
+      </CreditCard>
+    );
   }
+
   render(){
     return (
     <View>
@@ -77,7 +82,10 @@ export default class CalculationsScreen extends Component {
           value={this.state.couta}
         />
       </View>
-
+      <ListView
+          dataSource={this.state.cards}
+          renderRow={(rowData) => this.renderRow(rowData)}
+        />
     </View>);
     
   }
