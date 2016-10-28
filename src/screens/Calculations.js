@@ -10,7 +10,6 @@ import CreditCard from '../components/card.js';
 
 
 export default class CalculationsScreen extends Component {
-
   renderList(){
     return (
     <View>
@@ -65,7 +64,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'rgba(0,0,0,0.1)',
     margin: 5,
-    height: 150,
     padding: 15,
     shadowColor: '#ccc',
     shadowOffset: { width: 2, height: 2, },

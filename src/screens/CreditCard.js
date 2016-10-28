@@ -3,16 +3,19 @@ import {
   StyleSheet,
   View,
   Text,
+  TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import db from '../models';
+
 import { ListView } from 'realm/react-native';
 import {
   Button
 } from 'react-native-elements'
 
 export default class CreditCardScreen extends Component {
-  constructor(data){
-    super(data);
+  constructor(props) {
+    super(props);
     this.cards = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       nameCard : '',
@@ -23,7 +26,7 @@ export default class CreditCardScreen extends Component {
     };
   }
 
-  addCard(){
+  addCard() {
     db.write(() => {
       db.create('card', {
         name : this.state.nameCard,
@@ -40,19 +43,17 @@ export default class CreditCardScreen extends Component {
     });
   }
 
-  renderCard(data){
+  renderCard(data) {
 
     return 
   }
 
-  renderNewCard (){
+  renderNewCard() {
 
     return
   }
 
-  renderList(){
-
-
+  renderList() {
     return ( <View>
       <ListView
         dataSource={this.state.listCards}
@@ -69,13 +70,13 @@ export default class CreditCardScreen extends Component {
   }
 }
 
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
     backgroundColor: '#fff',
     borderColor: 'rgba(0,0,0,0.1)',
     margin: 5,
-    height: 150,
     padding: 15,
     shadowColor: '#ccc',
     shadowOffset: { width: 2, height: 2, },
