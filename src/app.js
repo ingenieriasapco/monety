@@ -13,7 +13,22 @@ import ReminderScreen from './screens/Reminder';
 import CreditCardScreen from './screens/CreditCard';
 import UserScreen from './screens/User';
 
+import DB from './models';
+
 export default class App extends Component {
+  componentDidMount(){
+    let list = DB.list('Card');
+    if (list[0] === undefined) {
+      const card = {
+        name		: 'MASTER CARD',
+        tax			:  12,
+        maxMount:	0,
+        type		: 'MASTER_CARD'
+      };
+      DB.add('Card', card);
+    }
+  }
+
   render() {
     return <ScrollableTabView
       style={{marginTop: 20, }}
@@ -43,4 +58,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.01)',
   },
 });
-

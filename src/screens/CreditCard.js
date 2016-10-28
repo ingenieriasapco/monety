@@ -26,6 +26,10 @@ export default class CreditCardScreen extends Component {
     };
   }
 
+  componentDidMount(){
+    console.log('Lista: ', DB.list('Card'));
+  }
+
   addCard() {
     let card = {
       name : this.state.nameCard,

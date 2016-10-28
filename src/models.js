@@ -4,9 +4,9 @@ const cardCreditSchema = {
 	name  : 'Card',
 	primaryKey: 'id',
 	properties : {
-		id			: 'int',
+		id			: 'string',
 		name 		: { type : 'string', indexed : true },
-		tax  		: { type : 'int', default: 0},
+		tax  		: { type : 'double', default: 0},
 		maxMount: { type : 'int', default: 0}, // Asi?
 		type    : 'string'
 	}
@@ -28,6 +28,7 @@ const realm = new Realm({schema: [userPhoneSchema, cardCreditSchema]});
 const DB = {
 	add: (model, data) => {
 		realm.write(() => {
+			data.id = `_${Math.random().toString(36).substr(2, 9)}`;
 		  realm.create(model, data);
 		});
 	},
