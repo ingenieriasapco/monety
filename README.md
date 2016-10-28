@@ -1,92 +1,52 @@
-# NativeBase-KitchenSink v0.5.11
-An example app with all the UI components of NativeBase
+# Monety
 
-[![play-store](https://strapmobile.com/wp-content/uploads/2016/02/google-play-200.png)](https://play.google.com/store/apps/details?id=com.nativebasekitchensink&hl=en) [![app-store](https://strapmobile.com/wp-content/uploads/2016/02/app-store-200.png)](https://itunes.apple.com/us/app/nativebase-kitchensink/id1162013771?mt=8)
+Monety es una aplicación móvil creada para concientizarnos del uso de las tarjetas de crédito, estamos en un mundo consumista y muchas veces no nos damos cuenta del valor que realmente pagamos cuando utilizamos las tarjetas de crédito.
 
-## Demo
+Con Monety, las personas van a conocer el valor real de los productos cuando los compran con tarjetas de crédito.
 
-iOS | Android
- :--:| :-----:
- ![ios-demo](/Screenshots/iOS/demo.gif) | ![android-demo](/Screenshots/android/demo.gif)
+## Getting Started
 
-[NativeBase](http://nativebase.io/) is a free and open source framework that enables developers to build high-quality mobile apps using [React Native](https://facebook.github.io/react-native/) iOS and Android apps with a fusion of ES6. NativeBase builds a layer on top of React Native that provides you with basic set of components for mobile application development. This helps you to build world-class application experiences on native platforms.
+Estas instrucciones le darán una copia del proyecto base para ejecutar en su máquina local para un ambiente de desarrollo.
 
-The applications stack of components is built using native UI components and because of that, there are no compromises with the User Experience of the applications. NativeBase without a doubt fits in well with mobile applications which cut downs one huge part of your app The Front end
+### Prerequisities
 
+Para ejecutar este proyecto debe tener instalado las siguentes herramientas.
 
-## Get Started
-
-####1. System Requirements
-
-* Globally installed [node](https://nodejs.org/en/) >= 4.0
-
-* Globally installed [npm](https://www.npmjs.org/) >= 3.0
-
-* Globally installed [rnpm](https://github.com/rnpm/rnpm) *(only if React Native version < 0.29)*
-
-* Globally installed [react-native CLI](https://facebook.github.io/react-native/docs/getting-started.html)
-
-* Install [CodePush](https://microsoft.github.io/code-push/) globally and get keys for your app.
+* [NodeJS](https://nodejs.org/en/)
+* [React Native](https://facebook.github.io/react-native/)
+* [Realm Mobile Database](https://realm.io/)
 
 
+### Installing
 
-####2. Installation
+A step by step series of examples that tell you have to get a development env running
 
-On the command prompt run the following commands
+Stay what the step will be
 
 ```sh
-$ git clone git@github.com:GeekyAnts/NativeBase-KitchenSink.git
-
-$ cd NativeBase-KitchenSink/
-
-$ npm install
+npm install
 ```
 
-If React Native < 0.29
+And run app
 
 ```sh
-$rnpm link
+npm start
 ```
 
-If React Native >= 0.29
+## Built With
 
-```sh
-$ react-native link
-```
+* [React Native](https://facebook.github.io/react-native/) - Build Native Mobile Apps using JavaScript and React
+* [Realm Mobile Database](https://realm.io/) - Build better apps, faster.
+* [NodeJS](https://nodejs.org/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [Atom](https://atom.io/) - Editor Open Source
 
-####3. Simulate for iOS
+## Authors
 
-**Method One**
+* **Cristian Moreno** - *FullStack JavaScript Developer* - [Github](https://github.com/khriztianmoreno)
+* **Ivan Portilla** - *FullStack JavaScript Developer* - [Github](https://github.com/Ivykp)
 
-*	Open the project in XCode from **ios/NativebaseKitchenSink.xcodeproj**
+See also the list of [contributors](https://github.com/ngenieriasapco/monety/contributors) who participated in this project.
 
-*	Hit the play button.
+## License
 
-
-**Method Two**
-
-*	Run the following command in your terminal
-
-```sh
-$ react-native run-ios
-```
-
-###4. Simulate for Android
-
-*	Make sure you have an **Android emulator** installed and running.
-
-*	Run the following command in your terminal
-
-```sh
-$ react-native run-android
-```
-
-## Quick Links to NativeBase
-
-*	[NativeBase Website](http://nativebase.io)
-*	[NativeBase Documentation](http://nativebase.io/documentation)
-*	[NativeBase on Twitter](https://twitter.com/NativeBaseIO)
-*	[NativeBase Blog](https://medium.com/nativebase-io-blog)
-
-
-For apps with more advance designs with NativeBase, please visit **[StrapMobile](https://strapmobile.com/)**.
+This project is licensed under MIT - see the [LICENSE.md](LICENSE.md) file for details
