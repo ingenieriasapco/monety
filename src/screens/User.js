@@ -3,16 +3,38 @@ import {
   StyleSheet,
   View,
   Text,
+  TextInput,
+  TouchableHighlight
 } from 'react-native';
 import db from '../models';
 
 export default class UserScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: {
+        name: undefined,
+        email: undefined,
+        token: undefined,
+      }
+    };
+  }
+
+  _onSubmit() {
+    console.log(this.state.data);
+  }
+
   render() {
     return (
       <View style={styles.card}>
         <Text>User screen</Text>
+        <TextInput onChangeText={(text) => this.state.data.email = text} />
+        <TouchableHighlight onPress={() => this._onSubmit()}>
+          <Text>{'Submit'}</Text>
+        </TouchableHighlight>
       </View>
-    );  
+    );
   }
 }
 

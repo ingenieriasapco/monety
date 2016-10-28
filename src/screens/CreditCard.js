@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import db from '../models';
+import DB from '../models';
 
 import { ListView } from 'realm/react-native';
 import {
@@ -22,30 +22,31 @@ export default class CreditCardScreen extends Component {
       taxCard : 0,
       maxMountCard : 0,
       openNew : false,
-      listCards : this.cards.cloneWithRows(db.objects('Card'))
+      listCards : this.cards.cloneWithRows(DB.list('Card'))
     };
   }
 
   addCard() {
-    db.write(() => {
-      db.create('card', {
-        name : this.state.nameCard,
-        tax : this.state.taxCard,
-        maxMount : this.state.maxMountCard,
-      });
-      this.setState({
-        openNew : false,
-        listCards : this.cards.cloneWithRows(db.objects('Card')),
-        nameCard : '',
-        taxCard : 0,
-        maxMountCard : 0,
-      });
+    let card = {
+      name : this.state.nameCard,
+      tax : this.state.taxCard,
+      maxMount : this.state.maxMountCard
+    };
+
+    DB.add('Card', card);
+
+    this.setState({
+      openNew : false,
+      listCards : this.cards.cloneWithRows(DB.list('Card')),
+      nameCard : '',
+      taxCard : 0,
+      maxMountCard : 0,
     });
   }
 
   renderCard(data) {
 
-    return 
+    return
   }
 
   renderNewCard() {
