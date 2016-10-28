@@ -3,7 +3,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput
+  TextInput,
+  Platform
 } from 'react-native';
 
 import db from '../models';
@@ -14,7 +15,7 @@ export default class CalculationsScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      precioStr : '0',
+      precioStr : '',
       precioNum : 0,
       couta : 0,
     };
@@ -26,7 +27,7 @@ export default class CalculationsScreen extends Component {
   }
 
   convertToString(num){
-    var nums = ( this.converToNumber(num) + '' ).split('');
+    var nums = ( this.converToNumber(num) + '' ).split('').reverse();
     var str = [];
 
     for (var i = nums.length - 1; i >= 0; i--) {
@@ -59,7 +60,9 @@ export default class CalculationsScreen extends Component {
       <View>
         <Text style={styles.label}>Valor</Text>
         <TextInput
-          style={styles.numbers}
+          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
+          placeholder="120.000"
+          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
           onChangeText={(text) => this.putNumber(text)}
           value={this.state.precioStr}
         />
@@ -67,8 +70,9 @@ export default class CalculationsScreen extends Component {
       <View>
         <Text style={styles.label}>Couta</Text>
         <TextInput
-          style={styles.numbers}
-          placeholder="Coutas"
+          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
+          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+          placeholder="12"
           onChangeText={(couta) => this.setState({couta})}
           value={this.state.couta}
         />
@@ -93,8 +97,9 @@ const styles = StyleSheet.create({
   },
   numbers : {
     fontSize : 50,
-    height : 50,
     paddingHorizontal : 10,
+    paddingTop : 1,
+    paddingBottom : 5,
     textAlign : 'right',
     borderColor: 'transparent',
     borderWidth: 1
