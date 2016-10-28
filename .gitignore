@@ -40,7 +40,7 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-# Workspace
+# Environment
 .vscode
 tsconfig.json
 .editorconfig
