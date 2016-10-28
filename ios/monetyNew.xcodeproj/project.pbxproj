@@ -34,6 +34,7 @@
 		7E19A01770E1426CB34B9606 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF88674C113C479CA577B0B6 /* EvilIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8D8D1A56E27244E8BF3E259F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 453EE504A7544C65A17722C2 /* libz.tbd */; };
+		A5E1EFCE1DC41017009A206C /* LogoTarjetaMonety.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E1EFCD1DC41017009A206C /* LogoTarjetaMonety.png */; };
 		D374432041044EC1B7B205C8 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1CA3ACE4CF249EE8894526F /* SimpleLineIcons.ttf */; };
 		D50E9E1106FC47BA8435DA28 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0A3C783DC79432895B46C3D /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
@@ -212,6 +213,7 @@
 		8E1F10B5650240CBB0E1FB6C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		9B21B577F1F0494D8B16D1A7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		A0A3C783DC79432895B46C3D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		A5E1EFCD1DC41017009A206C /* LogoTarjetaMonety.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoTarjetaMonety.png; sourceTree = "<group>"; };
 		AD777C0829A14BF9BB0ACCB1 /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
 		AF88674C113C479CA577B0B6 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		B0DBC056B4A347C6A4550C9F /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 		13B07FAE1A68108700A75B9A /* monetyNew */ = {
 			isa = PBXGroup;
 			children = (
+				A5E1EFCD1DC41017009A206C /* LogoTarjetaMonety.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -733,6 +736,7 @@
 				711FD07955684787922C4911 /* Foundation.ttf in Resources */,
 				287E23E1874D46B9883E5F0B /* Ionicons.ttf in Resources */,
 				00BA3CB4A3C34CF2A79585AA /* MaterialIcons.ttf in Resources */,
+				A5E1EFCE1DC41017009A206C /* LogoTarjetaMonety.png in Resources */,
 				3663CCF17D24417D9A2C3562 /* Octicons.ttf in Resources */,
 				D374432041044EC1B7B205C8 /* SimpleLineIcons.ttf in Resources */,
 				6D3F933885EB48D5B96EF67F /* Zocial.ttf in Resources */,
