@@ -49,4 +49,4 @@ See also the list of [contributors](https://github.com/ngenieriasapco/monety/con
 
 ## License
 
-This project is licensed under Copy Right - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under MIT - see the [LICENSE.md](LICENSE.md) file for details
