@@ -32,7 +32,6 @@ export default class CreditCard extends Component {
 	}
 }
 
-
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,

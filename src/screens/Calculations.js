@@ -3,42 +3,45 @@ import {
   StyleSheet,
   View,
   Text,
-
+  TextInput
 } from 'react-native';
+
 import db from '../models';
 import CreditCard from '../components/card.js';
 
-
 export default class CalculationsScreen extends Component {
-  renderList(){
-    return (
-    <View>
-      <View>
-        <Text>Valor</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
-      </View>
-      <View>
-        <Text>Coutas</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
-      </View>
+  constructor(props){
+    super(props);
+    this.state = {
+      precioStr : '0',
+      precioNum : 0,
+      couta : 0,
+    };
+  }
 
+  converToNumber (num){
+    var x = parseInt( ( num + '' ).replace(/\./gim, '') );
+    return _.isNaN(x) || x == 'NaN' ? 0 : x;
+  }
 
-      <ListView
-        dataSource={this.state.listCards}
-        renderRow={data => this.renderCard(data)} />
-      <Button
-        icon={{name: 'cached'}}
-        title='Agregar '
-        onPress={()=> this.setState({ openNew : true }) }/>
-    </View>);
+  convertToString(num){
+    var nums = ( this.converToNumber(num) + '' ).split('');
+    var str = [];
+
+    for (var i = nums.length - 1; i >= 0; i--) {
+      str.push(nums[i])
+      if(i % 3 === 0 && i > 1) {
+        str.push('.');
+      }
+    }
+
+    return str.join('');
+  }
+
+  putNumber (num){
+    var precioNum = this.converToNumber(num);
+    var precioStr = this.convertToString(num);
+    this.setState({precioNum,  precioStr });
   }
 
 
@@ -49,13 +52,27 @@ export default class CalculationsScreen extends Component {
       </CreditCard> );
 
   }
-
   render(){
     return (
-      <CreditCard typeCard="visa" name="holi122">
-        <Text>Blas</Text>
-      </CreditCard>
-    );
+    <View>
+      <View>
+        <Text style={style.label}>Valor</Text>
+        <TextInput
+          style={styles.numbers}
+          onChangeText={(text) => this.putNumber(text)}
+          value={this.state.precioStr}
+        />
+      </View>
+      <View>
+        <TextInput
+          style={styles.numbers}
+          placeholder="Coutas"
+          onChangeText={(couta) => this.setState({couta})}
+          value={this.state.couta}
+        />
+      </View>
+
+    </View>);
     
   }
 }
@@ -72,4 +89,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
   },
+  numbers : {
+    fontSize : 50,
+    height : 50,
+    paddingHorizontal : 10,
+    textAlgin : 'right',
+    borderColor: 'transparent',
+    borderWidth: 1
+  },
+  label : {
+    fontSize : 20,
+  }
 });
