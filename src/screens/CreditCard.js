@@ -7,48 +7,66 @@ import {
   Dimensions,
 } from 'react-native';
 import db from '../models';
-import FoldComponent from '../components/Fold';
 
-const Base = (props) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={{ height: 100, backgroundColor: 'grey' }}
-      onPress={() => props.toggle()}
-    >
-      <Text>Tarjeta {props.text}</Text>
-    </TouchableOpacity>
-  );
-}
-
-const Show = (props) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      style={{ height: 100, backgroundColor: 'grey' }}
-      onPress={() => props.toggle()}
-    >
-      <Text>Mostrar {props.text}</Text>
-    </TouchableOpacity>
-  );
-}
+import { ListView } from 'realm/react-native';
+import {
+  Button
+} from 'react-native-elements'
 
 export default class CreditCardScreen extends Component {
-  toggleFold() {
-    this.fold.toggle();
+  constructor(props) {
+    super(props);
+    this.cards = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      nameCard : '',
+      taxCard : 0,
+      maxMountCard : 0,
+      openNew : false,
+      listCards : this.ds.cloneWithRows(db.objects('Card'))
+    };
+  }
+
+  addCard() {
+    db.write(() => {
+      db.create('card', {
+        name : this.state.nameCard,
+        tax : this.state.taxCard,
+        maxMount : this.state.maxMountCard,
+      });
+      this.setState({
+        openNew : false,
+        listCards : this.cards.cloneWithRows(db.objects('Card')),
+        nameCard : '',
+        taxCard : 0,
+        maxMountCard : 0,
+      });
+    });
+  }
+
+  renderCard(data) {
+
+    return 
+  }
+
+  renderNewCard() {
+
+    return
+  }
+
+  renderList() {
+    return ( <View>
+      <ListView
+        dataSource={this.state.listCards}
+        renderRow={data => this.renderCard(data)} />
+      <Button
+        icon={{name: 'cached'}}
+        title='BUTTON WITH ICON'
+        onPress={()=> this.setState({ openNew : true }) }/>
+      </View>);
   }
 
   render() {
-    return (
-      <View style={styles.card}>
-        <Text>Credit Card Screen</Text>
-        <FoldComponent
-          ref={(fold) => { this.fold = fold; } }
-          BaseComponent={<Base text="Visa" toggle={this.toggleFold.bind(this)} />}
-          ShowComponent={<Show text="Couta, etc" toggle={this.toggleFold.bind(this)} />}
-        />
-      </View>
-    );  
+    return {this.state.openNew ? this.renderNewCard() : this.renderList() };  
   }
 }
 
