@@ -4,11 +4,11 @@ const cardCreditSchema = {
 	name  : 'Card',
 	primaryKey: 'id',
 	properties : {
-		id	 : 'int',
-		name : { type : 'string', indexed : true },
-		tax  : { type : 'int', default: 0},
-		cupo : { type : 'int', default: 0}, // Asi?
-		type : 'string',
+		id			: 'int',
+		name 		: { type : 'string', indexed : true },
+		tax  		: { type : 'int', default: 0},
+		maxMount: { type : 'int', default: 0}, // Asi?
+		type    : 'string'
 	}
 };
 
