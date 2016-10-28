@@ -4,10 +4,10 @@ const cardCreditSchema = {
 	name  : 'Card',
 	schemaVersion : 1,
 	properties : {
-		name : { type : 'string', indexed : true },
-		tax  : { type : 'int', default: 0},
-		cupo : { type : 'int', default: 0}, // Asi?
-		type : 'string',
+		name     : { type : 'string', indexed : true },
+		tax      : { type : 'int', default: 0},
+		maxMount : { type : 'int', default: 0}, // Asi?
+		type     : 'string',
 	}
 };
 
