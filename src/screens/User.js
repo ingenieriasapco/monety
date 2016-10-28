@@ -29,7 +29,9 @@ export default class UserScreen extends Component {
     return (
       <View style={styles.card}>
         <Text>User screen</Text>
-        <TextInput onChangeText={(text) => this.state.data.email = text} />
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => this.setState({data: { email: text}})} />
         <TouchableHighlight onPress={() => this._onSubmit()}>
           <Text>{'Submit'}</Text>
         </TouchableHighlight>
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 150,
     padding: 15,
+    alignSelf: 'stretch',
     shadowColor: '#ccc',
     shadowOffset: { width: 2, height: 2, },
     shadowOpacity: 0.5,
