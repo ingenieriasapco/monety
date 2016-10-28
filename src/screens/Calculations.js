@@ -8,6 +8,7 @@ import {
 
 import db from '../models';
 import CreditCard from '../components/card.js';
+import _ from 'lodash';
 
 export default class CalculationsScreen extends Component {
   constructor(props){
@@ -56,7 +57,7 @@ export default class CalculationsScreen extends Component {
     return (
     <View>
       <View>
-        <Text style={style.label}>Valor</Text>
+        <Text style={styles.label}>Valor</Text>
         <TextInput
           style={styles.numbers}
           onChangeText={(text) => this.putNumber(text)}
@@ -64,6 +65,7 @@ export default class CalculationsScreen extends Component {
         />
       </View>
       <View>
+        <Text style={styles.label}>Couta</Text>
         <TextInput
           style={styles.numbers}
           placeholder="Coutas"
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize : 50,
     height : 50,
     paddingHorizontal : 10,
-    textAlgin : 'right',
+    textAlign : 'right',
     borderColor: 'transparent',
     borderWidth: 1
   },
