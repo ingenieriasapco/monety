@@ -6,15 +6,17 @@ import {
   ScrollView,
 } from 'react-native';
 
-import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
+import Main from './screens/Main';
+
+/*import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import FacebookTabBar from './components/FacebookTabBar';
 import CalculationsScreen from './screens/Calculations';
 import ReminderScreen from './screens/Reminder';
 import CreditCardScreen from './screens/CreditCard';
-import UserScreen from './screens/User';
+import UserScreen from './screens/User'; */
 
 export default class App extends Component {
-  render() {
+  /*render() {
     return <ScrollableTabView
       style={{marginTop: 20, }}
       initialPage={1}
@@ -33,6 +35,16 @@ export default class App extends Component {
           <UserScreen />
         </ScrollView>
     </ScrollableTabView>;
+  }*/
+
+  render() {
+    return (
+      <View>
+        <Main>
+          <Text>fasdfasdfsadfsafasdfasdf</Text>
+        </Main>
+      </View>
+    );
   }
 }
 
