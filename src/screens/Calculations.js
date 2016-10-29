@@ -15,12 +15,13 @@ import _ from 'lodash';
 export default class CalculationsScreen extends Component {
   constructor(props){
     super(props);
-    this.cards = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2});
+    /*this.cards = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2});*/
     this.state = {
-      precioStr : '',
-      precioNum : 0,
-      couta : 0,
-      cards : this.cards.cloneWithRows( db.list('Card') )
+      priceStr : '',
+      priceNum : 0,
+      installment : 0,
+      tax : 2.3,
+      /*cards : this.cards.cloneWithRows( db.list('Card') )*/
     };
   }
 
@@ -44,22 +45,36 @@ export default class CalculationsScreen extends Component {
   }
 
   putNumber (num){
-    var precioNum = this.converToNumber(num);
-    var precioStr = this.convertToString(num);
-    this.setState({precioNum,  precioStr });
+    var priceNum = this.converToNumber(num);
+    var priceStr = this.convertToString(num);
+    this.setState({priceNum,  priceStr });
   }
 
 
-  renderRow(data){
-    // Aqui hacer los calculos
+  /*renderRow(data){
+    var total = ( this.state.priceNum * ( ( data.tasa * 100 ) + 1 ) ) ^ this.state.installment;
     return (
       <CreditCard typeCard={data.type} name={data.name}>
-        <Text>Blas</Text>
+        <TextInput
+          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+          onChangeText={(text) => this.putNumber(text)}
+          value={data.tax}
+        />
+        <Text>{' $' +  (total / this.state.installment ) }</Text>
+        <Text>{'Total $' +  total }</Text>
       </CreditCard>
     );
   }
+<ListView
+          dataSource={this.state.cards}
+          renderRow={(rowData) => this.renderRow(rowData)}
+        />
+  */
 
   render(){
+    var total = parseInt(this.state.priceNum * Math.pow( 1 + (this.state.tax / 100), this.state.installment));
+    /*var total =  Math.pow(this.state.priceNum * (1 + this.state.tax / 1000 ), this.state.installment) */
+
     return (
     <View>
       <View>
@@ -69,7 +84,7 @@ export default class CalculationsScreen extends Component {
           placeholder="120.000"
           keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
           onChangeText={(text) => this.putNumber(text)}
-          value={this.state.precioStr}
+          value={this.state.priceStr}
         />
       </View>
       <View>
@@ -78,14 +93,29 @@ export default class CalculationsScreen extends Component {
           style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
           keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
           placeholder="12"
-          onChangeText={(couta) => this.setState({couta})}
-          value={this.state.couta}
+          onChangeText={(installment) => this.setState({installment})}
+          value={this.state.installment}
         />
       </View>
-      <ListView
-          dataSource={this.state.cards}
-          renderRow={(rowData) => this.renderRow(rowData)}
+      <View>
+        <Text style={styles.label}>Intereses</Text>
+        <TextInput
+          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
+          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+          placeholder="12"
+          onChangeText={(tax) => this.setState({tax})}
+          value={this.state.tax}
         />
+      </View>
+
+      <View>
+        <Text style={styles.label}>Valor por couta</Text>
+        <Text style={styles.numbers}>{'$' + this.convertToString( parseInt(total / this.state.installment )) }</Text>
+        <Text style={styles.label}>Total</Text>
+        <Text style={styles.numbers}>{'$' + this.convertToString(total) }</Text>
+      </View>
+
+      
     </View>);
     
   }
@@ -114,5 +144,8 @@ const styles = StyleSheet.create({
   },
   label : {
     fontSize : 20,
+  },
+  result : {
+    textAlign : 'right',
   }
 });
