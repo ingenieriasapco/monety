@@ -27,10 +27,22 @@ Stay what the step will be
 npm install
 ```
 
-And run app
+run react native server
 
 ```sh
-npm start
+react-native start
+```
+
+run react native ios
+
+```sh
+react-native run-ios
+```
+
+run react native android
+
+```sh
+react-native run-android
 ```
 
 ## Built With
