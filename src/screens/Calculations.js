@@ -5,11 +5,11 @@ import {
   Text,
   TextInput,
   Platform,
-  ListView
+  ListView,
+  ScrollView,
+  Dimensions,
 } from 'react-native';
 
-import db from '../models';
-import CreditCard from '../components/card.js';
 import _ from 'lodash';
 
 export default class CalculationsScreen extends Component {
@@ -71,53 +71,68 @@ export default class CalculationsScreen extends Component {
         />
   */
 
+  nextInput(input) {
+    this.refs[input].focus();
+  }
+
   render(){
+    const { height, width } = Dimensions.get('window');
     var total = parseInt(this.state.priceNum * Math.pow( 1 + (this.state.tax / 100), this.state.installment));
     /*var total =  Math.pow(this.state.priceNum * (1 + this.state.tax / 1000 ), this.state.installment) */
 
     return (
-    <View>
-      <View>
-        <Text style={styles.label}>Valor</Text>
-        <TextInput
-          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
-          placeholder="120.000"
-          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
-          onChangeText={(text) => this.putNumber(text)}
-          value={this.state.priceStr}
-        />
-      </View>
-      <View>
-        <Text style={styles.label}>Couta</Text>
-        <TextInput
-          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
-          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
-          placeholder="12"
-          onChangeText={(installment) => this.setState({installment})}
-          value={this.state.installment}
-        />
-      </View>
-      <View>
-        <Text style={styles.label}>Intereses</Text>
-        <TextInput
-          style={[styles.numbers, Platform.OS == 'ios' ? { height : 50 } : { height : 75 } ]}
-          keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
-          placeholder="12"
-          onChangeText={(tax) => this.setState({tax})}
-          value={this.state.tax}
-        />
-      </View>
+      <View
+        style={{ height: height * 0.8, paddingHorizontal: 30, paddingVertical: 10 }}
+      >
+        <View>
+          <Text style={styles.label}>Valor</Text>
+          <TextInput
+            ref="price"
+            style={[styles.numbers]}
+            placeholder="0"
+            keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+            onChangeText={(text) => this.putNumber(text)}
+            value={this.state.priceStr}
+            underlineColorAndroid="rgb(245, 245, 245)"
+            onSubmitEditing={() => this.nextInput('installment')}
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Cuota</Text>
+          <TextInput
+            ref="installment"
+            style={[styles.numbers]}
+            keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+            placeholder="0"
+            onChangeText={(installment) => this.setState({installment})}
+            value={this.state.installment}
+            underlineColorAndroid="rgb(245, 245, 245)"
+            onSubmitEditing={() => this.nextInput('tax')}
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Intereses</Text>
+          <TextInput
+            ref="tax"
+            style={[styles.numbers]}
+            keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
+            placeholder="2.3"
+            onChangeText={(tax) => this.setState({tax})}
+            value={this.state.tax}
+            underlineColorAndroid="rgb(245, 245, 245)"
+          />
+        </View>
 
-      <View>
-        <Text style={styles.label}>Valor por couta</Text>
-        <Text style={styles.numbers}>{'$' + this.convertToString( parseInt(total / this.state.installment )) }</Text>
-        <Text style={styles.label}>Total</Text>
-        <Text style={styles.numbers}>{'$' + this.convertToString(total) }</Text>
+        <View>
+          <Text style={styles.label}>Valor cuota</Text>
+          <Text style={styles.numbers}>{'$' + this.convertToString( parseInt(total / this.state.installment )) }</Text>
+          <Text style={styles.label}>Total a pagar</Text>
+          <Text style={styles.numbers}>{'$' + this.convertToString(total) }</Text>
+          <Text style={[styles.label, { color: '#DF0101' }]}>Total pago de intereses</Text>
+          <Text style={[styles.numbers, { color: '#DF0101' }]}>{'$' + this.convertToString(total - parseInt(this.state.priceNum)) }</Text>
+        </View>
       </View>
-
-      
-    </View>);
-    
+    );    
   }
 }
 
@@ -134,16 +149,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   numbers : {
-    fontSize : 50,
+    fontSize : 40,
     paddingHorizontal : 10,
     paddingTop : 1,
     paddingBottom : 5,
     textAlign : 'right',
     borderColor: 'transparent',
-    borderWidth: 1
+    borderWidth: 1,
+    height: 50,
   },
   label : {
     fontSize : 20,
+    paddingHorizontal: 10,
   },
   result : {
     textAlign : 'right',
