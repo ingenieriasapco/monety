@@ -6,16 +6,20 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Main from './screens/Main';
-import Calculations from './screens/Calculations';
+import MonetyBrand from './screens/MonetyBrand';
+import MainMenu from './screens/MainMenu';
 
 export default class App extends Component {
 
   render() {
     return (
-      <Main>
-        <Calculations />
-      </Main>
+      /**
+       * Render de las tabs
+       * Por default vamos a renderizar la vista de la Calculadora
+       */
+      <MonetyBrand>
+        <MainMenu />
+      </MonetyBrand>
     );
   }
 }
