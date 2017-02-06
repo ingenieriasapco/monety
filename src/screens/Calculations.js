@@ -10,6 +10,11 @@ import {
   Dimensions,
 } from 'react-native';
 
+import {
+  Button,
+  
+} from 'react-native-elements';
+
 import _ from 'lodash';
 
 export default class CalculationsScreen extends Component {
@@ -25,12 +30,12 @@ export default class CalculationsScreen extends Component {
     };
   }
 
-  converToNumber (num){
+  converToNumber(num) {
     var x = parseInt( ( num + '' ).replace(/\./gim, '') );
     return _.isNaN(x) || x == 'NaN' ? 0 : x;
   }
 
-  convertToString(num){
+  convertToString(num) {
     var nums = ( this.converToNumber(num) + '' ).split('').reverse();
     var str = [];
 
@@ -47,7 +52,7 @@ export default class CalculationsScreen extends Component {
   putNumber (num){
     var priceNum = this.converToNumber(num);
     var priceStr = this.convertToString(num);
-    this.setState({priceNum,  priceStr });
+    this.setState({ priceNum, priceStr });
   }
 
 
@@ -89,7 +94,7 @@ export default class CalculationsScreen extends Component {
           <TextInput
             ref="price"
             style={[styles.numbers]}
-            placeholder="0"
+            placeholder="$"
             keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
             onChangeText={(text) => this.putNumber(text)}
             value={this.state.priceStr}
@@ -103,7 +108,7 @@ export default class CalculationsScreen extends Component {
             ref="installment"
             style={[styles.numbers]}
             keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
-            placeholder="0"
+            placeholder="$"
             onChangeText={(installment) => this.setState({installment})}
             value={this.state.installment}
             underlineColorAndroid="rgb(245, 245, 245)"
@@ -130,6 +135,10 @@ export default class CalculationsScreen extends Component {
           <Text style={styles.numbers}>{'$' + this.convertToString(total) }</Text>
           <Text style={[styles.label, { color: '#DF0101' }]}>Total pago de intereses</Text>
           <Text style={[styles.numbers, { color: '#DF0101' }]}>{'$' + this.convertToString(total - parseInt(this.state.priceNum)) }</Text>
+        </View>
+
+        <View>
+         
         </View>
       </View>
     );    
