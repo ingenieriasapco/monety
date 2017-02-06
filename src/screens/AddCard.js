@@ -45,6 +45,19 @@ export default class AddCard extends Component {
         balance: parseInt(this.state.currentBalance),
       }
       DB.create('Card', data);
+
+      // CLear our inputs
+      this.setState({
+        cardNumber: 0,
+        currentBalance: 0,
+      });
+
+      //Say that we've save the data
+      Alert.alert('Sucess!', 'Your CC has been saved!', [
+        { text: 'OK', onPress: () => console.log('Ok') }
+      ],
+      { cancelable: false },
+      );
     } else {
       Alert.alert('Error', 'Sorry, We do not allow empty data!', [
         { text: 'OK', onPress: () => console.log('Ok') }
