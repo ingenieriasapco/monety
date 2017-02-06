@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 // Import elements from react-native-elements
 import {
@@ -15,15 +15,15 @@ export default class Balance extends Component {
     super(props);
 
     this.state = {
-     card: []
+     cards: []
     }
-    //this.changeState = this.changeState.bind(this);
   }
 
   changeState(data) {
     this.setState({
-      card: data
+      cards: data
     }, () => {
+      // Callback executed for sync statechange
       console.log(this.state.card)
     });
     
@@ -44,12 +44,24 @@ export default class Balance extends Component {
     this.changeState(data);
   }
 
+  WholeCards() {
+    // Iterate the information
+    return this.state.cards.map(function(news, index){
+      return(
+        <ListItem
+          key={index}
+          title={`(${news.cardNumber}) has $ ${news.currentBalance}`}
+        />
+      );
+    });
+  }
+
 
   render() {
     return (
-      this.state.card.map((element, index) => {
-        <Text>Hola</Text>
-      })
+      <List>
+        {this.WholeCards()}
+      </List>
     );  
   }
 }  
