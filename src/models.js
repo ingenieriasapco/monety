@@ -1,60 +1,70 @@
 import Realm from 'realm';
 
-const cardCreditSchema = {
-	name  : 'Card',
-	primaryKey: 'id',
-	properties : {
-		id			: 'string',
-		name 		: { type : 'string', indexed : true },
-		tax  		: { type : 'double', default: 0},
-		maxMount: { type : 'int', default: 0}, // Asi?
-		type    : 'string'
+/**
+ * This is a basic schema
+ * for a basic job
+ * List cards and his current balance
+ */
+
+const cardSchema = {
+	name: 'Card',
+	properties: {
+		number: 'int',
+		balance: { type: 'double' }
 	}
 };
 
-const userPhoneSchema = {
-	name  : 'userPhone',
-	primaryKey: 'id',
-	properties : {
-		id	  : 'int',
-		name  : 'string',
-		email : { type: 'string', optional: true},
-		token : 'string'
+const purchaseSchema = {
+	name: 'Purchase',
+	properties: {
+		purchaseValue: 'double',
+		card: { type: 'Card' },
+		date: 'date'
 	}
 };
 
-const realm = new Realm({schema: [userPhoneSchema, cardCreditSchema]});
+const realm = new Realm({ 
+	schema: [cardSchema, purchaseSchema],
+	schemaVersion: 1,
+	migration: (oldRealm, newRealm) => {
+		const oldObjects = oldRealm.objects('Card');
+    const newObjects = newRealm.objects('Card');
+	}
+});
 
-const DB = {
-	add: (model, data) => {
-		realm.write(() => {
-			data.id = `_${Math.random().toString(36).substr(2, 9)}`;
-		  realm.create(model, data);
-		});
-	},
-	update: (model, data) => {
-		realm.write(() => {
-		  realm.create(model, data, true);
-		});
-	},
-	clean: (model) => {
-		realm.write(() => {
-			let _modelDelete = realm.objects(model);
-  		realm.delete(_modelDelete);
-		})
-	},
-	list: (model, sort) => {
-		if (sort)
-			return realm.objects(model).sorted(sort);
-		else
+// Almost CRUD (only with create and read)
+const CR = {
+
+		create: (model, data) =>	{
+			/**
+			 * Depends of the model
+			 * where we're gonna
+			 * save the data
+			 */
+			if (model === 'Card') {
+				realm.write( () => {
+					realm.create('Card', {
+						number: data.number,
+						balance: data.balance
+					});
+				});
+			} else if (model === 'Purchase') {
+				real.write(() => {
+					realm.create('Purchase', {
+						purchaseValue: data.purchaseValue,
+						card: data.card,
+						date: new Date(),
+						type: null
+					});
+				});
+			}
+		},
+		/**
+		 * Let's read our data!
+		 */
+		read: (model) => {
 			return realm.objects(model);
-	},
-	search: (model, query, sort) => {
-		if (sort)
-			return realm.objects(model).filtered(query).sorted(sort);
-		else
-			return realm.objects(model).filtered(query).sorted(sort);
-	}
+		}
 };
 
-export default DB;
+export default CR;
