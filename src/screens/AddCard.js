@@ -13,7 +13,8 @@ import {
   Button,
 } from 'react-native-elements';
 
-import style from '../components/styles'
+import style from '../components/styles';
+import DB from '../models';
 
 export default class AddCard extends Component {
 
@@ -23,11 +24,34 @@ export default class AddCard extends Component {
     this.state = {
       cardNumber: 0,
       currentBalance: 0,
-    }
+    };
+
+    this.sendForm = this.sendForm.bind(this);
   }
 
   sendForm() {
-    
+    const cardNumberLengthValue = this.state.cardNumber.toString().length;
+    const cardNumberLength = this.state.cardNumber !== 0 ? cardNumberLengthValue : 0;
+
+    const currentBalanceLengthValue = this.state.currentBalance.toString().length;
+    const currentBalanceLength = this.state.currentBalance !== 0 ? currentBalanceLengthValue : 0;
+
+    /**
+     * We do not allow empty camps!
+     */
+    if (cardNumberLength >= 4 && currentBalanceLength !== 0) {
+      const data = {
+        number: parseInt(this.state.cardNumber),
+        balance: parseInt(this.state.currentBalance),
+      }
+      DB.create('Card', data);
+    } else {
+      Alert.alert('Error', 'Sorry, We do not allow empty data!', [
+        { text: 'OK', onPress: () => console.log('Ok') }
+      ],
+      { cancelable: false },
+      );
+    }
   }
 
   render() {
@@ -40,7 +64,7 @@ export default class AddCard extends Component {
         <View>
           <FormLabel labelStyle={style.styles.label}>Last four (4) digits of your card</FormLabel>
           <FormInput
-            ref='cardNumber'
+            ref='cardNumber'         
             inputStyle={style.styles.card}
             keyboardType={ Platform.OS == 'ios' ? 'number-pad' : 'numeric' }
             placeholder='XXXX'
